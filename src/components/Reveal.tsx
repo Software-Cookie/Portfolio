@@ -13,7 +13,7 @@ function revealRef(el: HTMLElement | null) {
         e.target.classList.add('is-in')
         io!.unobserve(e.target)
       }),
-    { rootMargin: '0px 0px -12% 0px' },
+    { rootMargin: '0px 0px -4% 0px' },
   )
   io.observe(el)
   return () => io!.unobserve(el)
@@ -25,7 +25,7 @@ type Props = { children: ReactNode; delay?: number; className?: string; as?: 'di
 export function Reveal({ children, delay = 0, className = '', as = 'div' }: Props) {
   const Tag = as
   return (
-    <Tag ref={revealRef} className={`reveal ${className}`} style={delay ? { transitionDelay: `${delay}s` } : undefined}>
+    <Tag ref={revealRef} className={`reveal ${className}`} style={delay ? { transitionDelay: `${Math.min(delay, 0.2)}s` } : undefined}>
       {children}
     </Tag>
   )

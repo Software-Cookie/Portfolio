@@ -73,7 +73,8 @@ export function Stage() {
   const reduce = useMedia(REDUCE_Q)
   const { w, h } = useViewport()
   const [current, setCurrent] = useState(0)
-  const [loaded, setLoaded] = useState<Set<number>>(() => new Set([0, 1]))
+  // Until the first video can play, it gets the whole connection: neighbours wait, posters stay local.
+  const [ready, setReady] = useState(false)
   const [userPaused, setUserPaused] = useState<boolean | null>(null)
   const paused = userPaused ?? reduce
 
@@ -188,13 +189,19 @@ export function Stage() {
     }
   }, [])
 
-  // Keep only the current scene and its neighbours loaded; unload the rest to free memory/decoders.
+  // Fallback for browsers that never buffer muted video (e.g. iOS Low Power Mode): don't wait forever.
   useEffect(() => {
-    setLoaded((prev) => {
-      const next = new Set([current - 1, current, current + 1].filter((j) => scenes[j]))
-      return [...next].every((j) => prev.has(j)) && prev.size === next.size ? prev : next
-    })
-  }, [current])
+    if (ready) return
+    const t = window.setTimeout(() => setReady(true), 6000)
+    return () => window.clearTimeout(t)
+  }, [ready])
+
+  // Videos: the current scene, plus its neighbours once the first video is playable.
+  // Everything else is unloaded to free memory/decoders.
+  const hasVideo = (k: number) => k === current || (ready && Math.abs(k - current) === 1)
+  // Posters are small (~25 KB), so once the first video is ready they all load: no scene is ever black.
+  const hasPoster = (k: number) => ready || Math.abs(k - current) <= 1
+  const videoKey = scenes.map((_, k) => (hasVideo(k) ? 1 : 0)).join('')
 
   // Re-apply playback when pause state, motion preference or loaded sources change.
   useEffect(() => {
@@ -202,7 +209,7 @@ export function Stage() {
     reduceRef.current = reduce
     for (const v of videos.current) if (v && !v.getAttribute('src') && v.currentSrc) v.load()
     applyRef.current()
-  }, [paused, reduce, loaded])
+  }, [paused, reduce, videoKey])
 
   const scene = scenes[current]
 
@@ -224,16 +231,16 @@ export function Stage() {
                 ref={(el) => {
                   videos.current[k] = el
                 }}
-                src={loaded.has(k) ? sceneVideo(s.id) : undefined}
-                // Posters too are only set near the current scene, so the first visit doesn't fetch all 8.
-                poster={loaded.has(k) ? scenePoster(s.id) : undefined}
+                src={hasVideo(k) ? sceneVideo(s.id) : undefined}
+                poster={hasPoster(k) ? scenePoster(s.id) : undefined}
                 muted
                 loop
                 playsInline
-                preload={loaded.has(k) ? 'auto' : 'none'}
+                preload={hasVideo(k) ? 'auto' : 'none'}
                 disablePictureInPicture
                 tabIndex={-1}
                 onCanPlay={() => applyRef.current()}
+                onCanPlayThrough={() => setReady(true)}
                 className="absolute max-w-none object-cover"
                 style={{ left: f.left, top: f.top, width: f.width, height: f.height }}
               />

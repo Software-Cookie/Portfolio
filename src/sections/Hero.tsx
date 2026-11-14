@@ -25,18 +25,18 @@ export function Hero() {
     >
       <div className="gutter w-full pt-[44svh] pb-16 wide:py-28">
         <div className="wide:w-[46%] [text-shadow:0_2px_24px_rgb(5_5_5/0.6)]">
-          <p className="fade-up eyebrow flex items-center gap-3 text-paper/80" style={at(0.1)}>
+          <p className="fade-up eyebrow flex items-center gap-3 text-paper/80" style={at(0)}>
             <span aria-hidden className="h-px w-8 bg-wine" />
             {profile.role}
           </p>
           <h1 className="mt-6 font-display text-[clamp(3.4rem,6.6vw,10rem)] leading-[0.88] tracking-[-0.02em]">
-            <MaskLine text={profile.firstName} delay={0.2} />
-            <MaskLine text={profile.lastName} delay={0.35} className="italic text-paper/90" />
+            <MaskLine text={profile.firstName} delay={0.05} />
+            <MaskLine text={profile.lastName} delay={0.12} className="italic text-paper/90" />
           </h1>
-          <p className="fade-up mt-8 max-w-[32rem] text-base leading-relaxed text-paper/75 sm:text-lg" style={at(0.6)}>
+          <p className="fade-up mt-8 max-w-[32rem] text-base leading-relaxed text-paper/75 sm:text-lg" style={at(0.25)}>
             {profile.intro}
           </p>
-          <div className="fade-up mt-10 flex flex-wrap gap-3 [text-shadow:none]" style={at(0.75)}>
+          <div className="fade-up mt-10 flex flex-wrap gap-3 [text-shadow:none]" style={at(0.35)}>
             <a
               href="#projects"
               className="group inline-flex items-center gap-3 bg-wine px-6 py-3.5 text-sm font-medium text-paper transition hover:bg-[#8f1d3f]"
