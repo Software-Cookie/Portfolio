@@ -38,7 +38,8 @@ function head(c: Content) {
     '@type': 'ProfilePage',
     url: `${site}/`,
     name: title,
-    dateModified: new Date().toISOString().slice(0, 10),
+    // Full ISO 8601 datetime with timezone (Google's ProfilePage rich result rejects a bare date).
+    dateModified: new Date().toISOString().replace(/\.\d+Z$/, 'Z'),
     mainEntity: {
       '@type': 'Person',
       '@id': `${site}/#person`,
