@@ -1,0 +1,256 @@
+{
+  "profile": {
+    "name": "Sivaprasad Pearlapaati",
+    "firstName": "Sivaprasad",
+    "lastName": "Pearlapaati",
+    "role": "Software Engineer",
+    "intro": "Software engineer building Java and Spring Boot microservices. Lead Software Engineer at Stackly on the ONE Enterprise Cloud Platform, and builder of TopCoders, a live competitive-programming platform running on AWS.",
+    "email": "sp.dev.engineer@gmail.com",
+    "phone": "+91 6302263892",
+    "resume": "/Sivaprasad_Pearlapaati_Resume.pdf",
+    "site": "https://sivaprasad.live",
+    "searchDescription": "Sivaprasad Pearlapaati is a software engineer building Java and Spring Boot microservices — Lead Software Engineer at Stackly and creator of TopCoders.",
+    "links": {
+      "github": "https://github.com/sivaprasad264842",
+      "linkedin": "https://www.linkedin.com/in/sivaprasad116/",
+      "leetcode": "https://leetcode.com/u/siva264842/"
+    }
+  },
+  "sections": {
+    "about": {
+      "title": "Engineer by training, *builder* by habit."
+    },
+    "skills": {
+      "title": "The toolkit, *as listed*."
+    },
+    "projects": {
+      "title": "Things I’ve *built*.",
+      "intro": "Platforms I’ve designed, built and shipped — from a live coding judge on AWS to a search engine written from scratch. Source code is on GitHub."
+    },
+    "experience": {
+      "title": "Plan, build, test, *ship*."
+    },
+    "education": {
+      "title": "Where the *foundations* were laid."
+    },
+    "certifications": {
+      "title": "On *record*."
+    },
+    "contact": {
+      "title": "Let’s build *something*.",
+      "intro": "Email is the quickest way to reach me — or find my code on GitHub."
+    }
+  },
+  "about": {
+    "paragraphs": [
+      "I’m a software engineer and a B.Tech graduate of Lovely Professional University (2020 – 2024).",
+      "At Stackly I joined as a Software Engineer building Java and Spring Boot APIs for the ONE Enterprise Cloud Platform, then moved up to Lead Software Engineer — leading a 12-member backend team and owning sprint planning, API design and role-based access control across the HRMS, ERP, CRM and Finance modules.",
+      "Outside work I build systems end to end: TopCoders, a live coding platform with per-user code sandboxes on AWS Fargate, and SearchForge, a web search engine written from scratch in Java. Before Stackly I interned at Mind Sparc Innovations and ScrollAR4U Technologies."
+    ],
+    "facts": [
+      {
+        "label": "Current role",
+        "value": "Lead Software Engineer · Stackly"
+      },
+      {
+        "label": "Education",
+        "value": "B.Tech, Lovely Professional University"
+      },
+      {
+        "label": "Shipped",
+        "value": "TopCoders · topcoders.online"
+      }
+    ]
+  },
+  "skills": [
+    {
+      "group": "Programming Languages",
+      "items": [
+        "Python",
+        "SQL",
+        "Java",
+        "C",
+        "C++"
+      ]
+    },
+    {
+      "group": "Backend Systems & Frameworks",
+      "items": [
+        "Spring Boot",
+        "RESTful APIs",
+        "Microservices",
+        "Distributed Systems",
+        "TensorFlow.js",
+        "React"
+      ]
+    },
+    {
+      "group": "Databases",
+      "items": [
+        "MySQL",
+        "MongoDB"
+      ]
+    },
+    {
+      "group": "DevOps & Tools",
+      "items": [
+        "Git",
+        "Docker",
+        "Kubernetes",
+        "Postman",
+        "Maven",
+        "Jenkins",
+        "CI/CD"
+      ]
+    },
+    {
+      "group": "Cloud & System Skills",
+      "items": [
+        "AWS",
+        "OCI",
+        "System Design",
+        "Unity 3D"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Top Coders — Competitive Programming Platform",
+      "status": "Completed",
+      "period": "Feb 2026 – Jul 2026",
+      "summary": "A LeetCode-style platform with a browser IDE, hidden-test judging, monthly hackathons and real-time leaderboards.",
+      "points": [
+        "Architected and deployed a coding platform supporting 4 languages (C++, Java, Python, JavaScript) with a browser IDE, hidden-test judging, monthly hackathons, and real-time leaderboards ranked by points and penalty time.",
+        "Engineered an on-demand, per-user code sandbox on AWS ECS Fargate with auto-shutdown on idle, logout or tab close, cutting execution compute costs by 92% (~$40 → ~$3/month).",
+        "Implemented secure authentication and RBAC: JWT with token-version revocation, bcrypt hashing, email verification, password reset and per-user rate limiting.",
+        "Automated AWS infrastructure (IAM, ECR, ECS, ALB, ACM, SSM) and a GitHub Actions CI/CD pipeline running 55 unit, API and end-to-end tests against real MongoDB and runner containers."
+      ],
+      "tech": [
+        "React",
+        "Monaco Editor",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "AWS ECS Fargate",
+        "Docker",
+        "GitHub Actions",
+        "JWT"
+      ],
+      "repo": "https://github.com/Software-Cookie/TopCoders",
+      "live": "https://topcoders.online"
+    },
+    {
+      "name": "SearchForge — Web Search Engine from Scratch",
+      "status": "Ongoing",
+      "period": "Jul 2026 – Present",
+      "summary": "A web search engine written from first principles in Java 21 — no Lucene, no Elasticsearch.",
+      "points": [
+        "Built a polite, resumable web crawler: RFC 9309 robots.txt parsing, a per-host politeness frontier, virtual-thread workers, an SSRF guard and SimHash near-duplicate detection.",
+        "Designed a compressed positional inverted index built with external merge sort (sorted runs, k-way merge), VByte + d-gap encoding and memory-mapped reads.",
+        "Ranked results with BM25F (title, headings and body weighted) plus a PageRank prior; added phrase and boolean queries, top-K autocomplete and BK-tree “Did you mean?” spelling suggestions.",
+        "Delivered a Spring Boot API with result caching, per-IP rate limiting and security headers, and a responsive React + TypeScript search UI — with 96–99% line coverage per module enforced by the build."
+      ],
+      "tech": [
+        "Java 21",
+        "Spring Boot",
+        "React",
+        "TypeScript",
+        "Gradle",
+        "Docker",
+        "JMH"
+      ],
+      "repo": "https://github.com/Software-Cookie/SearchForge",
+      "live": ""
+    }
+  ],
+  "experience": [
+    {
+      "role": "Lead Software Engineer",
+      "company": "Stackly",
+      "place": "Hyderabad",
+      "period": "Jul 2026 – Nov 2026",
+      "points": [
+        "Led a 12-member backend team building the ONE Enterprise Cloud Platform across HRMS, ERP, CRM and Finance modules.",
+        "Owned sprint planning, task estimation and work allocation in Agile cycles to keep releases on schedule.",
+        "Drove backend architecture and API design for scalable, maintainable Java and Spring Boot microservices.",
+        "Owned platform administration and role-based access control (RBAC), designing roles and permissions that secure data across all modules.",
+        "Reviewed pull requests and enforced coding standards, testing practices and clean architecture across the team.",
+        "Mentored engineers through technical guidance, pair debugging and knowledge-sharing sessions.",
+        "Coordinated with product, frontend and QA teams to define requirements, unblock dependencies and resolve production incidents."
+      ]
+    },
+    {
+      "role": "Software Engineer",
+      "company": "Stackly",
+      "place": "Hyderabad",
+      "period": "May 2026 – Jul 2026",
+      "points": [
+        "Developed backend features and RESTful APIs using Java and Spring Boot for the HRMS, ERP, CRM and Finance modules of the ONE Enterprise Cloud Platform.",
+        "Designed and optimized database schemas and queries to support new platform features.",
+        "Wrote unit and integration tests (JUnit, Mockito) to ensure code reliability before release.",
+        "Debugged and resolved production issues by analyzing logs, tracing root causes and shipping fixes.",
+        "Participated in code reviews, following clean-code principles and team coding standards.",
+        "Collaborated with frontend, QA and product teams in Agile sprints to deliver features on schedule."
+      ]
+    },
+    {
+      "role": "Software Developer Intern",
+      "company": "Mind Sparc Innovations Pvt Ltd",
+      "place": "Hyderabad",
+      "period": "Aug 2024 – Nov 2024",
+      "points": [
+        "Designed scalable distributed systems using Java, C++ and Python, improving performance for real-time processing.",
+        "Built and optimized RESTful APIs and microservices for large-scale distributed computing environments, enabling real-time predictions at scale.",
+        "Solved ambiguous problems with agile methodologies in rapid development cycles, using Git and Docker for version control and deployment."
+      ]
+    },
+    {
+      "role": "Software Engineer Intern",
+      "company": "ScrollAR4U Technologies Pvt Ltd",
+      "place": "Bathinda",
+      "period": "Jan 2024 – Jul 2024",
+      "points": [
+        "Developed and integrated AR models into Android and iOS educational apps, aligned with children’s syllabus content.",
+        "Led AR feature development in a 7-member engineering team, delivering 50+ interactive AR models across 12 subjects at 60 fps on mid-range devices.",
+        "Apps adopted in 200+ schools, boosting student engagement by 85% and improving concept-retention scores by 40% in pilot studies."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "Lovely Professional University",
+      "place": "Jalandhar, Punjab",
+      "degree": "Bachelor of Technology",
+      "period": "Jun 2020 – Jun 2024"
+    },
+    {
+      "school": "Sri Chaithanya Junior College",
+      "place": "Vijayawada, AP",
+      "degree": "Intermediate Education",
+      "period": "Jun 2018 – Aug 2020"
+    }
+  ],
+  "certificates": [
+    {
+      "title": "Oracle Cloud Infrastructure 2025 AI Foundations Associate",
+      "issuer": "Oracle",
+      "date": "Oct 2025",
+      "note": "Generative AI, prompt engineering and responsible AI on OCI.",
+      "url": "https://drive.google.com/file/d/1BX-E9IQW3jqQ-UpKEsKSpKzXRWNZaeXC/view?usp=sharing"
+    },
+    {
+      "title": "Full Stack Web Development Intern",
+      "issuer": "Mind Sparc Innovations Pvt Ltd",
+      "date": "Nov 2024",
+      "note": "3-month internship delivering Java Spring Boot + React e-learning platforms with AI-driven features for 1,000+ users.",
+      "url": "https://drive.google.com/file/d/1ThsuHKibS3p8URIFX-kway1_vhtHQxCJ/view?usp=sharing"
+    },
+    {
+      "title": "Software Development Engineer Intern",
+      "issuer": "ScrollAR4U Technologies Pvt Ltd",
+      "date": "Jul 2024",
+      "note": "6-month internship building AR-enhanced Android/iOS educational apps with Unity 3D.",
+      "url": "https://drive.google.com/file/d/1Po6NcxXBXgWOZPFgIMWbGrZzt7NliQe3/view?usp=sharing"
+    }
+  ]
+}

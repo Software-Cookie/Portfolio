@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050505" />
+    <!-- Title, description, social tags and structured data are generated from src/content.json (see vite.config.ts) -->
+    <!--seo-head-->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" as="image" href="/media/hero-poster.webp" type="image/webp" fetchpriority="high" />
+    <style>
+      /* Plain-HTML copy of the content for search engines and no-JS visitors.
+         React replaces it on load; it only fades in if JavaScript is slow or disabled. */
+      .prerender { max-width: 46rem; margin: 0 auto; padding: 5rem 1.5rem; color: #f5f2ee; background: #050505;
+        font: 16px/1.65 system-ui, sans-serif; opacity: 0; animation: prerender-in 0.4s 2.5s forwards; }
+      .prerender h1 { font: 3rem/1.1 Georgia, serif; margin: 0 0 0.5rem; }
+      .prerender h2 { font: 1.8rem Georgia, serif; margin: 3rem 0 1rem; }
+      .prerender h3 { font-size: 1.05rem; margin: 1.5rem 0 0.25rem; }
+      .prerender a { color: #c25672; }
+      .prerender ul { padding-left: 1.2rem; color: #c9c3bd; }
+      @keyframes prerender-in { to { opacity: 1; } }
+    </style>
+  </head>
+  <body style="background: #050505">
+    <div id="root"><!--seo-body--></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

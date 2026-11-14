@@ -1,0 +1,8 @@
+node_modules
+dist
+*.tsbuildinfo
+*.tmp
+
+# Local-only tools and notes — kept on this computer, never pushed or deployed
+cms/
+docs/
