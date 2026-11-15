@@ -60,7 +60,7 @@ export function Nav() {
           <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-wine transition group-hover:scale-150" />
         </a>
 
-        <ul className="hidden items-center gap-7 md:flex">
+        <ul className="hidden items-center gap-5 md:flex lg:gap-7">
           {nav.map((n) => (
             <li key={n.id}>
               <a

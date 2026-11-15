@@ -21,6 +21,7 @@ export const projects = data.projects as Project[]
 export const experience = data.experience
 export const education = data.education
 export const certificates = data.certificates
+export const freelance = data.freelance
 
 export const nav = [
   { id: 'about', label: 'About', index: '02' },
@@ -28,16 +29,18 @@ export const nav = [
   { id: 'projects', label: 'Projects', index: '04' },
   { id: 'experience', label: 'Experience', index: '05' },
   { id: 'education', label: 'Education', index: '06' },
-  { id: 'contact', label: 'Contact', index: '08' },
+  { id: 'freelance', label: 'Freelance', index: '08' },
+  { id: 'contact', label: 'Contact', index: '09' },
 ]
 
 // Full-screen background scenes, cut from the supplied Google Flow video (public/media).
 // focusX: where the person stands in the frame (0 = left edge, 1 = right edge).
 // side: which side of the screen the person is placed on; text goes on the other side.
 export type SceneId =
-  | 'hero' | 'about' | 'skills' | 'projects' | 'experience' | 'education' | 'certifications' | 'contact'
+  | 'hero' | 'about' | 'skills' | 'projects' | 'experience' | 'education' | 'certifications' | 'freelance' | 'contact'
 
-export type Scene = { id: SceneId; label: string; index: string; focusX: number; side: 'left' | 'right' }
+// media: reuse another scene's clip (defaults to the scene's own id).
+export type Scene = { id: SceneId; label: string; index: string; focusX: number; side: 'left' | 'right'; media?: SceneId }
 
 export const scenes: Scene[] = [
   { id: 'hero', label: 'Intro', index: '01', focusX: 0.52, side: 'right' },
@@ -47,7 +50,8 @@ export const scenes: Scene[] = [
   { id: 'experience', label: 'Experience', index: '05', focusX: 0.55, side: 'right' },
   { id: 'education', label: 'Education', index: '06', focusX: 0.42, side: 'left' },
   { id: 'certifications', label: 'Certifications', index: '07', focusX: 0.49, side: 'right' },
-  { id: 'contact', label: 'Contact', index: '08', focusX: 0.52, side: 'left' },
+  { id: 'freelance', label: 'Freelance', index: '08', focusX: 0.52, side: 'left', media: 'hero' },
+  { id: 'contact', label: 'Contact', index: '09', focusX: 0.52, side: 'right' },
 ]
 
 export const sceneVideo = (id: SceneId) => `/media/${id}.mp4`

@@ -9,6 +9,7 @@ import { Skills } from './sections/Skills'
 import { Projects } from './sections/Projects'
 import { Experience } from './sections/Experience'
 import { Certifications, Education } from './sections/Education'
+import { Freelance } from './sections/Freelance'
 import { Contact } from './sections/Contact'
 
 createRoot(document.getElementById('root')!).render(
@@ -23,6 +24,7 @@ createRoot(document.getElementById('root')!).render(
       <Experience />
       <Education />
       <Certifications />
+      <Freelance />
       <Contact />
     </main>
   </StrictMode>,

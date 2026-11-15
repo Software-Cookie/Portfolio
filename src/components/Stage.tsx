@@ -231,8 +231,8 @@ export function Stage() {
                 ref={(el) => {
                   videos.current[k] = el
                 }}
-                src={hasVideo(k) ? sceneVideo(s.id) : undefined}
-                poster={hasPoster(k) ? scenePoster(s.id) : undefined}
+                src={hasVideo(k) ? sceneVideo(s.media ?? s.id) : undefined}
+                poster={hasPoster(k) ? scenePoster(s.media ?? s.id) : undefined}
                 muted
                 loop
                 playsInline

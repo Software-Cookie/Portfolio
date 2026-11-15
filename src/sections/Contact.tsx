@@ -25,8 +25,8 @@ export function Contact() {
 
   return (
     <>
-      <SceneSection id="contact" scene="contact" text="right">
-          <SectionHeading index="08" label="Contact" title={sections.contact.title} />
+      <SceneSection id="contact" scene="contact" text="left">
+          <SectionHeading index="09" label="Contact" title={sections.contact.title} />
           <Reveal delay={0.1}>
             <p className="mt-6 max-w-md text-muted">{sections.contact.intro}</p>
           </Reveal>

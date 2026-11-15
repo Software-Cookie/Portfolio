@@ -115,6 +115,9 @@ function body(c: Content) {
       <section><h2>Certifications</h2>${c.certificates
         .map((x) => `<p><strong>${esc(x.title)}</strong> — ${esc(x.issuer)}, ${esc(x.date)}</p>`)
         .join('')}</section>
+      <section><h2>Freelance — ${esc(plain(c.sections.freelance.title))}</h2><p>${esc(c.sections.freelance.intro)}</p>${list(
+        c.freelance.services.map((x) => `${x.name} — ${x.note}`),
+      )}<p>${a(`mailto:${c.freelance.email}`, c.freelance.email)}</p></section>
       <section><h2>${esc(plain(c.sections.contact.title))}</h2><p>${a(`mailto:${p.email}`, p.email)}</p></section>
     </div>`
 }
