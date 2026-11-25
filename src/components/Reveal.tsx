@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
 // One shared observer for every Reveal: adds .is-in once the element scrolls into view.
-// The fade itself is plain CSS (see .reveal in index.css), so no animation library is needed.
+// The fade itself is plain CSS (see .reveal in index.css).
 let io: IntersectionObserver | undefined
 
 function revealRef(el: HTMLElement | null) {
@@ -19,36 +19,44 @@ function revealRef(el: HTMLElement | null) {
   return () => io!.unobserve(el)
 }
 
-type Props = { children: ReactNode; delay?: number; className?: string; as?: 'div' | 'li' }
+type Props = { children: ReactNode; delay?: number; className?: string; as?: 'div' | 'li' | 'article' }
 
 /** Fades content up once as it enters the viewport. Opacity-only under reduced motion. */
 export function Reveal({ children, delay = 0, className = '', as = 'div' }: Props) {
   const Tag = as
   return (
-    <Tag ref={revealRef} className={`reveal ${className}`} style={delay ? { transitionDelay: `${Math.min(delay, 0.2)}s` } : undefined}>
+    <Tag ref={revealRef} className={`reveal ${className}`} style={delay ? { transitionDelay: `${Math.min(delay, 0.24)}s` } : undefined}>
       {children}
     </Tag>
   )
 }
 
-/** Renders "*word*" as an italic accent, so headings can be edited as plain text in the CMS. */
+/** Renders "*word*" in the accent colour, so headings can be edited as plain text in the admin panel. */
 export function Emph({ text }: { text: string }) {
-  return text.split('*').map((part, i) => (i % 2 ? <em key={i}>{part}</em> : part))
+  return text.split('*').map((part, i) =>
+    i % 2 ? (
+      <span key={i} className="bg-gradient-to-r from-brand-600 to-sky bg-clip-text text-transparent">
+        {part}
+      </span>
+    ) : (
+      part
+    ),
+  )
 }
 
-type HeadingProps = { index: string; label: string; title: string; className?: string }
+type HeadingProps = { eyebrow: string; title: string; intro?: string; className?: string; id?: string }
 
-export function SectionHeading({ index, label, title, className = '' }: HeadingProps) {
+export function SectionHeading({ eyebrow, title, intro, className = '', id }: HeadingProps) {
   return (
     <Reveal className={className}>
       <p className="eyebrow flex items-center gap-3">
-        <span className="text-wine-soft">{index}</span>
-        <span aria-hidden className="h-px w-8 bg-wine" />
-        {label}
+        <span aria-hidden className="h-px w-6 bg-brand" />
+        {eyebrow}
       </p>
-      <h2 className="mt-5 font-display text-5xl leading-[0.95] tracking-[-0.01em] text-balance sm:text-6xl lg:text-7xl">
+      <h2 id={id} className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
         <Emph text={title} />
       </h2>
+      {intro && <p className="mt-4 max-w-2xl text-[1.02rem] leading-relaxed text-body">{intro}</p>}
     </Reveal>
   )
 }

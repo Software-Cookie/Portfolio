@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@fontsource-variable/inter-tight": "^5.3.0",
-    "@fontsource/instrument-serif": "^5.3.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },
@@ -24,7 +23,7 @@
     "typescript": "^7.0.2",
     "vite": "^8.3.4"
   },
-  "description": "Cinematic, scroll-driven personal portfolio — React 19, TypeScript, Vite, Tailwind CSS v4 — with a local-only CMS and git-based auto-deploy.",
+  "description": "Clean, light personal portfolio — React 19, TypeScript, Vite, Tailwind CSS v4 — with a project gallery, a local-only admin panel and git-based auto-deploy.",
   "engines": {
     "node": ">=20"
   }

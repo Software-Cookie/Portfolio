@@ -1,15 +1,20 @@
-// All editable text lives in content.json — edit it with the local CMS (npm run cms).
-// This file only adds types and the design settings that are tied to the layout.
+// All editable text lives in content.json — edit it with the admin panel (npm run cms).
+// This file only adds types and the layout settings that are tied to the design.
 import data from './content.json'
 
 export type Project = {
   name: string
+  category?: string
   status: 'Ongoing' | 'Completed'
   period: string
+  role?: string
   summary: string
+  overview?: string
   points: string[]
   tech: string[]
-  repo: string
+  image?: string
+  gallery?: string[]
+  repo?: string
   live?: string
 }
 
@@ -23,36 +28,45 @@ export const education = data.education
 export const certificates = data.certificates
 export const freelance = data.freelance
 
+/** URL-safe id for a project, used for #project/<slug> deep links. */
+export const slugOf = (p: Project) =>
+  p.name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+
+/** Host name shown in the preview's browser bar, e.g. "topcoders.online". */
+export const hostOf = (url?: string) => {
+  try {
+    return url ? new URL(url).host.replace(/^www\./, '') : ''
+  } catch {
+    return ''
+  }
+}
+
 export const nav = [
-  { id: 'about', label: 'About', index: '02' },
-  { id: 'skills', label: 'Skills', index: '03' },
-  { id: 'projects', label: 'Projects', index: '04' },
-  { id: 'experience', label: 'Experience', index: '05' },
-  { id: 'education', label: 'Education', index: '06' },
-  { id: 'freelance', label: 'Freelance', index: '08' },
-  { id: 'contact', label: 'Contact', index: '09' },
+  { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'education', label: 'Education' },
+  { id: 'contact', label: 'Contact' },
 ]
 
-// Full-screen background scenes, cut from the supplied Google Flow video (public/media).
-// focusX: where the person stands in the frame (0 = left edge, 1 = right edge).
-// side: which side of the screen the person is placed on; text goes on the other side.
-export type SceneId =
-  | 'hero' | 'about' | 'skills' | 'projects' | 'experience' | 'education' | 'certifications' | 'freelance' | 'contact'
+// Short portrait clips (public/media). focusX = where the person stands in the 16:9 frame (0–1),
+// used to keep them centred when the clip is cropped to a portrait card.
+export type SceneId = 'hero' | 'about' | 'skills' | 'projects' | 'experience' | 'education' | 'certifications' | 'contact'
 
-// media: reuse another scene's clip (defaults to the scene's own id).
-export type Scene = { id: SceneId; label: string; index: string; focusX: number; side: 'left' | 'right'; media?: SceneId }
-
-export const scenes: Scene[] = [
-  { id: 'hero', label: 'Intro', index: '01', focusX: 0.52, side: 'right' },
-  { id: 'about', label: 'About', index: '02', focusX: 0.36, side: 'left' },
-  { id: 'skills', label: 'Skills', index: '03', focusX: 0.53, side: 'right' },
-  { id: 'projects', label: 'Projects', index: '04', focusX: 0.47, side: 'left' },
-  { id: 'experience', label: 'Experience', index: '05', focusX: 0.55, side: 'right' },
-  { id: 'education', label: 'Education', index: '06', focusX: 0.42, side: 'left' },
-  { id: 'certifications', label: 'Certifications', index: '07', focusX: 0.49, side: 'right' },
-  { id: 'freelance', label: 'Freelance', index: '08', focusX: 0.52, side: 'left', media: 'hero' },
-  { id: 'contact', label: 'Contact', index: '09', focusX: 0.52, side: 'right' },
-]
+export const focusX: Record<SceneId, number> = {
+  hero: 0.52,
+  about: 0.5,
+  skills: 0.5,
+  projects: 0.5,
+  experience: 0.56,
+  education: 0.5,
+  certifications: 0.5,
+  contact: 0.52,
+}
 
 export const sceneVideo = (id: SceneId) => `/media/${id}.mp4`
 export const scenePoster = (id: SceneId) => `/media/${id}-poster.webp`

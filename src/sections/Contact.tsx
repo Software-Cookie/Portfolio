@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Reveal, SectionHeading } from '../components/Reveal'
-import { SceneSection } from '../components/SceneSection'
+import { Reveal } from '../components/Reveal'
+import { Section } from '../components/Section'
+import { ArrowRight, Briefcase, Check, Copy, Download, GitHub, LeetCode, LinkedIn, Mail, Phone } from '../components/Icons'
 import { profile, sections } from '../content'
-import { DownloadIcon } from '../components/DownloadIcon'
+import { openFreelance } from '../freelanceEvents'
 
 export function Contact() {
   const [copy, setCopy] = useState<'idle' | 'done' | 'fail'>('idle')
@@ -18,95 +19,82 @@ export function Contact() {
   }
 
   const links = [
-    { label: 'GitHub', href: profile.links.github },
-    { label: 'LinkedIn', href: profile.links.linkedin },
-    { label: 'LeetCode', href: profile.links.leetcode },
+    { label: 'GitHub', href: profile.links.github, Icon: GitHub },
+    { label: 'LinkedIn', href: profile.links.linkedin, Icon: LinkedIn },
+    { label: 'LeetCode', href: profile.links.leetcode, Icon: LeetCode },
   ].filter((l) => l.href)
 
   return (
     <>
-      <SceneSection id="contact" scene="contact" text="left">
-          <SectionHeading index="09" label="Contact" title={sections.contact.title} />
-          <Reveal delay={0.1}>
-            <p className="mt-6 max-w-md text-muted">{sections.contact.intro}</p>
-          </Reveal>
-
-          <Reveal delay={0.15}>
-            <a
-              href={`mailto:${profile.email}`}
-              className="mt-10 block break-all font-display text-[clamp(1.5rem,3.2vw,2.6rem)] leading-tight underline decoration-wine decoration-1 underline-offset-[0.2em] transition hover:decoration-paper"
-            >
-              {profile.email}
+      <Section id="contact" eyebrow="Contact" title={sections.contact.title} intro={sections.contact.intro} media={{ scene: 'contact', side: 'left' }}>
+        <Reveal className="card p-6 sm:p-8">
+          <p className="text-sm font-medium text-muted">Email</p>
+          <a href={`mailto:${profile.email}`} className="mt-1 block text-xl font-semibold break-all text-ink transition hover:text-brand-700 sm:text-2xl">
+            {profile.email}
+          </a>
+          <div className="mt-6 flex flex-wrap items-center gap-2.5">
+            <a href={`mailto:${profile.email}`} className="btn btn-primary">
+              <Mail size={15} /> Send an email
             </a>
-          </Reveal>
+            <button type="button" onClick={copyEmail} className="btn btn-outline">
+              {copy === 'done' ? <Check size={15} /> : <Copy size={15} />}
+              {copy === 'done' ? 'Copied' : 'Copy address'}
+            </button>
+            <a href={profile.resume} download className="btn btn-soft">
+              <Download size={15} /> Resume (PDF)
+            </a>
+          </div>
+          <p role="status" aria-live="polite" className="mt-2 min-h-5 text-xs text-muted">
+            {copy === 'done' ? 'Email address copied to clipboard.' : copy === 'fail' ? 'Couldn’t copy — please select the address above.' : ''}
+          </p>
 
-          <Reveal delay={0.2}>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a
-                href={`mailto:${profile.email}`}
-                className="inline-flex items-center gap-3 bg-wine px-6 py-3.5 text-sm font-medium text-paper transition hover:bg-[#8f1d3f]"
-              >
-                Send an email <span aria-hidden>→</span>
-              </a>
-              <button
-                type="button"
-                onClick={copyEmail}
-                className="inline-flex items-center px-6 py-3.5 text-sm font-medium text-paper ring-1 ring-white/20 transition hover:ring-paper"
-              >
-                {copy === 'done' ? 'Copied ✓' : 'Copy address'}
-              </button>
-              <a
-                href={profile.resume}
-                download
-                className="group inline-flex items-center gap-2.5 px-6 py-3.5 text-sm font-medium text-paper ring-1 ring-white/20 transition hover:ring-paper"
-              >
-                <DownloadIcon className="transition-transform duration-300 group-hover:translate-y-0.5" />
-                Resume (PDF)
-              </a>
-              <span role="status" aria-live="polite" className="text-xs text-muted">
-                {copy === 'done' ? 'Email address copied to clipboard.' : copy === 'fail' ? 'Couldn’t copy — please select the address above.' : ''}
-              </span>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.25}>
-            <dl className="mt-14 grid gap-6 border-t border-line pt-8 sm:grid-cols-2">
+          <dl className="mt-4 grid gap-5 border-t border-line pt-6 sm:grid-cols-2">
+            {profile.phone && (
               <div>
-                <dt className="eyebrow">Phone</dt>
-                <dd className="mt-2">
-                  <a href={`tel:${profile.phone.replace(/\s/g, '')}`} className="text-paper transition hover:text-wine-soft">
-                    {profile.phone}
+                <dt className="text-sm font-medium text-muted">Phone</dt>
+                <dd className="mt-1">
+                  <a href={`tel:${profile.phone.replace(/\s/g, '')}`} className="inline-flex items-center gap-2 font-medium text-ink transition hover:text-brand-700">
+                    <Phone size={15} className="text-brand" /> {profile.phone}
                   </a>
                 </dd>
               </div>
-              <div>
-                <dt className="eyebrow">Elsewhere</dt>
-                <dd className="mt-2 flex flex-wrap gap-x-5 gap-y-2">
-                  {links.map((l) => (
-                    <a
-                      key={l.label}
-                      href={l.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-paper transition hover:text-wine-soft"
-                    >
-                      {l.label} ↗<span className="sr-only"> (opens in a new tab)</span>
-                    </a>
-                  ))}
-                </dd>
-              </div>
-            </dl>
-          </Reveal>
-      </SceneSection>
-      <footer className="relative z-10 border-t border-line bg-ink">
-        <div className="gutter flex flex-col gap-3 py-8 text-xs text-faint sm:flex-row sm:items-center sm:justify-between">
-        <p>
-          © {new Date().getFullYear()} {profile.name}
-        </p>
-        <p>Portrait visuals created with Google Flow.</p>
-        <a href="#top" className="transition hover:text-paper">
-          Back to top ↑
-        </a>
+            )}
+            <div>
+              <dt className="text-sm font-medium text-muted">Profiles</dt>
+              <dd className="mt-1.5 flex flex-wrap gap-2">
+                {links.map(({ label, href, Icon }) => (
+                  <a key={label} href={href} target="_blank" rel="noreferrer" className="btn btn-outline btn-sm">
+                    <Icon size={14} /> {label}
+                    <span className="sr-only">(opens in a new tab)</span>
+                  </a>
+                ))}
+              </dd>
+            </div>
+          </dl>
+        </Reveal>
+
+        <Reveal delay={0.08} className="mt-5 flex flex-col gap-4 rounded-2xl bg-gradient-to-br from-brand to-[#5aa6f2] p-6 text-white shadow-lift sm:flex-row sm:items-center sm:justify-between sm:p-7">
+          <div>
+            <p className="flex items-center gap-2 font-semibold">
+              <Briefcase size={17} /> Have a project in mind?
+            </p>
+            <p className="mt-1 text-sm text-white/85">Tell me what you need. I’ll reply with next steps and a quote.</p>
+          </div>
+          <button type="button" onClick={openFreelance} className="btn bg-white text-brand-700 shadow-card hover:-translate-y-px hover:bg-tint">
+            Start a project <ArrowRight size={15} />
+          </button>
+        </Reveal>
+      </Section>
+
+      <footer className="border-t border-line bg-white">
+        <div className="container-x flex flex-col gap-3 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {new Date().getFullYear()} {profile.name}
+          </p>
+          <p>Portrait visuals created with Google Flow.</p>
+          <a href="#top" className="font-medium text-body transition hover:text-brand-700">
+            Back to top
+          </a>
         </div>
       </footer>
     </>

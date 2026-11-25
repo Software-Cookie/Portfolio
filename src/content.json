@@ -21,11 +21,11 @@
       "title": "Engineer by training, *builder* by habit."
     },
     "skills": {
-      "title": "The toolkit, *as listed*."
+      "title": "The *toolkit* I work with."
     },
     "projects": {
       "title": "Things I’ve *built*.",
-      "intro": "Platforms I’ve designed, built and shipped — from a live coding judge on AWS to a search engine written from scratch. Source code is on GitHub."
+      "intro": "Platforms I’ve designed, built and shipped. Open any project to see exactly what I did, the stack, and links to the live site and source code."
     },
     "experience": {
       "title": "Plan, build, test, *ship*."
@@ -62,7 +62,7 @@
       },
       {
         "label": "Shipped",
-        "value": "TopCoders · topcoders.online"
+        "value": "Top Coders · SearchForge"
       }
     ]
   },
@@ -119,10 +119,13 @@
   ],
   "projects": [
     {
-      "name": "Top Coders — Competitive Programming Platform",
+      "name": "Top Coders",
+      "category": "Competitive programming platform",
       "status": "Completed",
       "period": "Feb 2026 – Jul 2026",
+      "role": "Solo — design, build and deploy",
       "summary": "A LeetCode-style platform with a browser IDE, hidden-test judging, monthly hackathons and real-time leaderboards.",
+      "overview": "Top Coders is a full-stack competitive programming platform where users solve problems in C++, Java, Python or JavaScript right in the browser. Every submission runs against hidden tests in an isolated sandbox, and results feed into monthly hackathons and real-time leaderboards ranked by points and penalty time.\n\nI designed and built the whole system end to end: the React front end with the Monaco editor, the Node.js and Express API, MongoDB data model, the per-user code runners on AWS ECS Fargate, and the CI/CD pipeline that deploys it.",
       "points": [
         "Architected and deployed a coding platform supporting 4 languages (C++, Java, Python, JavaScript) with a browser IDE, hidden-test judging, monthly hackathons, and real-time leaderboards ranked by points and penalty time.",
         "Engineered an on-demand, per-user code sandbox on AWS ECS Fargate with auto-shutdown on idle, logout or tab close, cutting execution compute costs by 92% (~$40 → ~$3/month).",
@@ -140,19 +143,27 @@
         "GitHub Actions",
         "JWT"
       ],
+      "image": "/projects/topcoders.png",
+      "gallery": [
+        "/projects/topcoders-leaderboard.png"
+      ],
       "repo": "https://github.com/Software-Cookie/TopCoders",
       "live": "https://topcoders.online"
     },
     {
-      "name": "SearchForge — Web Search Engine from Scratch",
+      "name": "SearchForge",
+      "category": "Web search engine from scratch",
       "status": "Ongoing",
       "period": "Jul 2026 – Present",
+      "role": "Solo — design and build",
       "summary": "A web search engine written from first principles in Java 21 — no Lucene, no Elasticsearch.",
+      "overview": "SearchForge is a complete web search engine built without search libraries: it crawls the web politely, builds a compressed index, ranks results by relevance and link popularity, and serves them through a fast React interface.\n\nThe crawler collects 48 pages per second across 120 websites while following each site’s robots.txt rules. A batch pipeline splits indexing into parallel tasks, a custom compression scheme cuts index storage by 76%, and ranking that combines text matching with PageRank over 100,000+ links scores 84% on a standard ranking-quality benchmark.",
       "points": [
-        "Built a polite, resumable web crawler: RFC 9309 robots.txt parsing, a per-host politeness frontier, virtual-thread workers, an SSRF guard and SimHash near-duplicate detection.",
-        "Designed a compressed positional inverted index built with external merge sort (sorted runs, k-way merge), VByte + d-gap encoding and memory-mapped reads.",
-        "Ranked results with BM25F (title, headings and body weighted) plus a PageRank prior; added phrase and boolean queries, top-K autocomplete and BK-tree “Did you mean?” spelling suggestions.",
-        "Delivered a Spring Boot API with result caching, per-IP rate limiting and security headers, and a responsive React + TypeScript search UI — with 96–99% line coverage per module enforced by the build."
+        "Built a polite, resumable web crawler that collects 48 pages per second across 120 websites: RFC 9309 robots.txt parsing, a per-host politeness frontier, virtual-thread workers, an SSRF guard and SimHash near-duplicate detection.",
+        "Designed a batch indexing pipeline (external merge sort with sorted runs and a k-way merge) and a custom VByte + d-gap compression scheme that reduced index storage by 76%, with memory-mapped reads.",
+        "Ranked results with BM25F (title, headings and body weighted) plus a PageRank prior over 100,000+ links, scoring 84% on a standard ranking-quality benchmark; added phrase and boolean queries and top-K autocomplete.",
+        "Added BK-tree “Did you mean?” spelling suggestions that check 98% fewer words per search.",
+        "Delivered a Spring Boot API with result caching, per-IP rate limiting and security headers, and a responsive React + TypeScript search UI, with 96–99% line coverage per module enforced by the build."
       ],
       "tech": [
         "Java 21",
@@ -163,6 +174,8 @@
         "Docker",
         "JMH"
       ],
+      "image": "/projects/searchforge.png",
+      "gallery": [],
       "repo": "https://github.com/Software-Cookie/SearchForge",
       "live": "https://searchforge.onrender.com"
     }

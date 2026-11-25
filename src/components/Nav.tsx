@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { nav, profile } from '../content'
-import { DownloadIcon } from './DownloadIcon'
+import { openFreelance } from '../freelanceEvents'
+import { Briefcase, Download } from './Icons'
 
 export function Nav() {
   const [active, setActive] = useState('')
@@ -9,16 +10,12 @@ export function Nav() {
   const menuBtn = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
+    const onScroll = () => setScrolled(window.scrollY > 8)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    const io = new IntersectionObserver(
-      (entries) =>
-        entries.forEach(
-          (e) => e.isIntersecting && setActive(e.target.id === 'certifications' ? 'education' : e.target.id),
-        ),
-      { rootMargin: '-45% 0px -50% 0px' },
-    )
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)), {
+      rootMargin: '-45% 0px -50% 0px',
+    })
     document.querySelectorAll('main section[id]').forEach((s) => io.observe(s))
     return () => {
       window.removeEventListener('scroll', onScroll)
@@ -28,7 +25,6 @@ export function Nav() {
 
   useEffect(() => {
     if (!open) return
-    document.body.style.overflow = 'hidden'
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setOpen(false)
@@ -36,104 +32,106 @@ export function Nav() {
       }
     }
     window.addEventListener('keydown', onKey)
-    return () => {
-      document.body.style.overflow = ''
-      window.removeEventListener('keydown', onKey)
-    }
+    return () => window.removeEventListener('keydown', onKey)
   }, [open])
+
+  const hire = () => {
+    setOpen(false)
+    openFreelance()
+  }
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-        scrolled || open ? 'bg-ink/90' : 'bg-transparent'
+      className={`fixed inset-x-0 top-0 z-50 transition duration-300 ${
+        scrolled || open ? 'bg-white/85 shadow-[0_1px_0_var(--color-line)] backdrop-blur-md' : 'bg-transparent'
       }`}
     >
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:bg-paper focus:px-3 focus:py-2 focus:text-ink"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-4 focus:rounded-full focus:bg-brand focus:px-4 focus:py-2 focus:text-white"
       >
         Skip to content
       </a>
-      <nav aria-label="Primary" className="gutter flex h-16 items-center justify-between">
-        <a href="#top" className="group flex items-baseline gap-2" aria-label={`${profile.name}, back to top`}>
-          <span className="font-display text-2xl leading-none">SP</span>
-          <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-wine transition group-hover:scale-150" />
+      <nav aria-label="Primary" className="container-x flex h-16 items-center justify-between gap-6">
+        <a href="#top" className="group flex items-center gap-2.5" aria-label={`${profile.name}, back to top`}>
+          <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand to-sky text-sm font-bold text-white shadow-[0_6px_14px_-6px_rgb(47_127_230/0.7)] transition duration-300 group-hover:rotate-[-4deg]">
+            SP
+          </span>
+          <span className="hidden text-[0.95rem] font-semibold text-ink sm:block">{profile.name}</span>
         </a>
 
-        <ul className="hidden items-center gap-5 md:flex lg:gap-7">
+        <ul className="hidden items-center gap-1 lg:flex">
           {nav.map((n) => (
             <li key={n.id}>
               <a
                 href={`#${n.id}`}
                 aria-current={active === n.id ? 'true' : undefined}
-                className={`relative py-2 text-[0.8rem] tracking-wide transition-colors hover:text-paper ${
-                  active === n.id ? 'text-paper' : 'text-muted'
+                className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors duration-300 ${
+                  active === n.id ? 'bg-tint text-brand-700' : 'text-body hover:bg-soft hover:text-ink'
                 }`}
               >
                 {n.label}
-                <span
-                  aria-hidden
-                  className={`absolute inset-x-0 -bottom-0.5 h-px origin-left bg-wine transition-transform duration-500 ${
-                    active === n.id ? 'scale-x-100' : 'scale-x-0'
-                  }`}
-                />
               </a>
             </li>
           ))}
-          <li>
-            <a
-              href={profile.resume}
-              download
-              className="group inline-flex items-center gap-2 bg-wine px-4 py-2 text-[0.8rem] font-medium text-paper transition hover:bg-[#8f1d3f]"
-            >
-              <DownloadIcon className="transition-transform duration-300 group-hover:translate-y-0.5" />
-              Resume
-            </a>
-          </li>
         </ul>
 
-        <button
-          ref={menuBtn}
-          type="button"
-          className="relative -mr-2 grid h-11 w-11 place-items-center md:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          onClick={() => setOpen((o) => !o)}
-        >
-          <span aria-hidden className={`absolute h-px w-6 bg-paper transition ${open ? 'rotate-45' : '-translate-y-1'}`} />
-          <span aria-hidden className={`absolute h-px w-6 bg-paper transition ${open ? '-rotate-45' : 'translate-y-1'}`} />
-        </button>
+        <div className="hidden items-center gap-2 lg:flex">
+          <button type="button" onClick={hire} className="btn btn-outline">
+            <Briefcase size={15} />
+            Freelance
+          </button>
+          <a href={profile.resume} download className="btn btn-primary">
+            <Download size={15} />
+            Resume
+          </a>
+        </div>
+
+        <div className="flex items-center gap-2 lg:hidden">
+          <button type="button" onClick={hire} className="btn btn-outline btn-sm">
+            Freelance
+          </button>
+          <button
+            ref={menuBtn}
+            type="button"
+            className="relative grid h-10 w-10 cursor-pointer place-items-center rounded-full ring-1 ring-line transition hover:ring-brand"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            onClick={() => setOpen((o) => !o)}
+          >
+            <span aria-hidden className={`absolute h-[1.5px] w-4.5 rounded bg-ink transition duration-300 ${open ? 'rotate-45' : '-translate-y-1'}`} />
+            <span aria-hidden className={`absolute h-[1.5px] w-4.5 rounded bg-ink transition duration-300 ${open ? '-rotate-45' : 'translate-y-1'}`} />
+          </button>
+        </div>
       </nav>
 
-      <div
-        id="mobile-menu"
-        hidden={!open}
-        className="h-[calc(100svh-4rem)] overflow-y-auto border-t border-line bg-ink gutter pb-10 pt-6 md:hidden"
-      >
-        <ul className="space-y-1">
+      <div id="mobile-menu" hidden={!open} className="border-t border-line bg-white lg:hidden">
+        <ul className="container-x grid gap-1 py-4">
           {nav.map((n) => (
             <li key={n.id}>
               <a
                 href={`#${n.id}`}
                 onClick={() => setOpen(false)}
-                className="flex items-baseline gap-4 border-b border-line py-4 font-display text-4xl"
+                className={`block rounded-xl px-4 py-3 text-base font-medium transition ${
+                  active === n.id ? 'bg-tint text-brand-700' : 'text-ink hover:bg-soft'
+                }`}
               >
-                <span className="font-sans text-xs text-wine-soft">{n.index}</span>
                 {n.label}
               </a>
             </li>
           ))}
+          <li className="mt-3 grid grid-cols-2 gap-2">
+            <button type="button" onClick={hire} className="btn btn-outline btn-lg">
+              <Briefcase size={16} />
+              Freelance
+            </button>
+            <a href={profile.resume} download onClick={() => setOpen(false)} className="btn btn-primary btn-lg">
+              <Download size={16} />
+              Resume
+            </a>
+          </li>
         </ul>
-        <a
-          href={profile.resume}
-          download
-          onClick={() => setOpen(false)}
-          className="mt-8 flex items-center justify-center gap-3 bg-wine px-6 py-4 text-sm font-medium text-paper"
-        >
-          <DownloadIcon />
-          Download Resume (PDF)
-        </a>
       </div>
     </header>
   )
