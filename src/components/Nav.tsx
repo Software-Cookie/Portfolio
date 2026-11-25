@@ -54,9 +54,13 @@ export function Nav() {
       </a>
       <nav aria-label="Primary" className="container-x flex h-16 items-center justify-between gap-6">
         <a href="#top" className="group flex items-center gap-2.5" aria-label={`${profile.name}, back to top`}>
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand to-sky text-sm font-bold text-white shadow-[0_6px_14px_-6px_rgb(47_127_230/0.7)] transition duration-300 group-hover:rotate-[-4deg]">
-            SP
-          </span>
+          <img
+            src="/logo.png"
+            alt=""
+            width={44}
+            height={44}
+            className="h-11 w-11 rounded-full shadow-[0_6px_16px_-6px_rgb(14_26_43/0.55)] ring-2 ring-white transition duration-300 group-hover:scale-105 group-hover:rotate-[-4deg]"
+          />
           <span className="hidden text-[0.95rem] font-semibold text-ink sm:block">{profile.name}</span>
         </a>
 

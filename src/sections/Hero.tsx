@@ -52,7 +52,7 @@ export function Hero() {
               </span>
             )}
           </p>
-          <p className="fade-up mt-6 max-w-xl text-[1.05rem] leading-relaxed text-body" style={at(0.18)}>
+          <p className="fade-up mt-6 max-w-2xl text-[1.05rem] leading-relaxed text-body" style={at(0.18)}>
             {profile.intro}
           </p>
 

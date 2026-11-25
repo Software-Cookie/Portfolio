@@ -56,7 +56,7 @@ export function SectionHeading({ eyebrow, title, intro, className = '', id }: He
       <h2 id={id} className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
         <Emph text={title} />
       </h2>
-      {intro && <p className="mt-4 max-w-2xl text-[1.02rem] leading-relaxed text-body">{intro}</p>}
+      {intro && <p className="mt-4 max-w-3xl text-[1.02rem] leading-relaxed text-body">{intro}</p>}
     </Reveal>
   )
 }
