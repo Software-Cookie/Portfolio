@@ -26,7 +26,8 @@
 
 @layer base {
   html {
-    font-size: clamp(16px, 0.25vw + 12.5px, 18px);
+    /* 16px on laptops, growing to 20px on large monitors so the layout fills the screen */
+    font-size: clamp(16px, 0.35vw + 11px, 20px);
     background: var(--color-page);
     color: var(--color-body);
     -webkit-font-smoothing: antialiased;
@@ -66,9 +67,9 @@
 @layer components {
   .container-x {
     width: 100%;
-    max-width: 76rem;
     margin-inline: auto;
-    padding-inline: clamp(1rem, 4vw, 2.5rem);
+    /* full width on every screen, with side margins that grow on large monitors */
+    padding-inline: clamp(1rem, 5vw, 7rem);
   }
   .eyebrow {
     @apply text-xs font-semibold tracking-[0.14em] text-brand-600 uppercase;

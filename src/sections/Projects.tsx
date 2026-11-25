@@ -320,7 +320,7 @@ export function Projects() {
         </div>
 
         {shown.length ? (
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {shown.map(({ p, k }, i) => (
               <Card key={slugOf(p)} p={p} i={i} onOpen={() => open(k)} />
             ))}
